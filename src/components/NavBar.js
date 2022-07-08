@@ -1,10 +1,11 @@
 import logo from '../assets/logo01.png';
 import './NavBar.css';
+import CartWidget from './CartWidget';
 
 const NavBar = () => {
     return(
       <>
-        <nav className="navbar navbar-expand-lg" style={{"backgroundColor": "#5A3A1C"}}>
+        <nav className="navbar navbar-expand-lg" style={{"backgroundColor": "#5A3A1C", "paddingRight":"40px"}}>
             <div className="container-fluid">
                 <a className="navbar-brand a_logo" href="/#" padding="0">
                     <img src={logo} alt="" width="100" height="100"></img>
@@ -20,6 +21,7 @@ const NavBar = () => {
                         <a className="nav-link item_menu" href="/#">Picnics</a>
                     </div>
                 </div>
+                <CartWidget/>
             </div>
         </nav>
     
