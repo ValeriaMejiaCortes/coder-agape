@@ -4,11 +4,6 @@
     font-weight:700 !important;
 }
 
-.a_logo{
-    margin-left: 50px;
-    padding-top: 0px !important;
-}
-
 .items{
     flex-direction: row-reverse;
     padding-right: 50px;
