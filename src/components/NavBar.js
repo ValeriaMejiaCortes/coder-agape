@@ -1,13 +1,12 @@
-import logo from "../assets/logo.png";
-import "./NavBar.css";
 import CartWidget from "./CartWidget";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   return (
     <>
       <nav className="bg-gray-800">
         <div className="max-w8xl mx-auto px-8 sm:px-6 lg:px-8">
-          <div className="relative flex items-center justify-between h-16">
+          <div className="relative flex items-center justify-between h-[80px]">
             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
               <button
                 type="button"
@@ -51,48 +50,50 @@ const NavBar = () => {
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex-shrink-0 flex items-center">
-                <img
-                  className="block lg:hidden h-10 w-auto"
-                  src={logo}
-                  alt="Workflow"
-                ></img>
+                <Link to="/">
+                  <img
+                    className="block lg:hidden h-16 w-auto"
+                    src={`../assets/logo.png`}
+                    alt=""
+                  ></img>
 
-                <img
-                  className="hidden lg:block h-10 w-auto"
-                  src={logo}
-                  alt="Workflow"
-                />
+                  <img
+                    className="hidden lg:block h-16 w-auto"
+                    src={`../assets/logo.png`}
+                    alt=""
+                  />
+                </Link>
               </div>
-              <div className="hidden sm:block sm:ml-6">
-                <div className="flex space-x-4">
-                  <a
-                    href="/#"
-                    className="bg-gray-900 text-white px-3 py-2 rounded-md text-sm font-medium"
+              <div className="hidden sm:block sm:ml-6 mt-[1%]">
+                <div className="flex space-x-4 ">
+                  <Link
+                    to="/category/1"
+                    className="no-underline bg-gray-900 text-white px-3 py-2 rounded-md font-medium"
                     aria-current="page"
                   >
                     Tablas
-                  </a>
+                  </Link>
 
-                  <a
-                    href="/#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  <Link
+                    to="/category/2"
+                    className="no-underline text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
                   >
                     Sangrías
-                  </a>
+                  </Link>
 
-                  <a
-                    href="/#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  <Link
+                    to="/category/3"
+                    className="no-underline text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
                   >
                     Kids
-                  </a>
+                  </Link>
 
-                  <a
-                    href="/#"
-                    className="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                  <Link
+                    to="/category/4"
+                    className="no-underline text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md font-medium"
                   >
                     Picnics
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -116,58 +117,35 @@ const NavBar = () => {
 
         <div className="sm:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <a
-              href="/#"
-              className="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-              aria-current="page"
+            <Link
+              to="/category/1"
+              className="no-underline bg-gray-900 text-white block px-3 py-2 rounded-md font-medium"
             >
               Tablas
-            </a>
-            <a
-              href="/#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            </Link>
+            <Link
+              to="/category/2"
+              className="no-underline text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md  font-medium"
             >
               Sangrías
-            </a>
-            <a
-              href="/#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            </Link>
+            <Link
+              to="/category/3"
+              className="no-underline text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md  font-medium"
             >
               Kids
-            </a>
-            <a
-              href="/#"
-              className="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+            </Link>
+            <Link
+              to="/category/4"
+              className="no-underline text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md font-medium"
             >
               Picnics
-            </a>
+            </Link>
           </div>
         </div>
       </nav>
     </>
   );
-
-  /*
-    <nav className="navbar navbar-expand-lg" style={{"backgroundColor": "#5A3A1C", "paddingRight":"40px"}}>
-            <div className="container-fluid">
-                <a className="navbar-brand a_logo" href="/#" padding="0">
-                    <img src={logo} alt="" width="100" height="100"></img>
-                </a>
-                <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-                    <span className="navbar-toggler-icon"></span>
-                </button>
-                <div className="collapse navbar-collapse items" id="navbarNavAltMarkup">
-                    <div className="navbar-nav">
-                        <a className="nav-link active item_menu" aria-current="page" href="/#">Tablas</a>
-                        <a className="nav-link item_menu" href="/#">Sangrías</a>
-                        <a className="nav-link item_menu" href="/#">Kids</a>
-                        <a className="nav-link item_menu" href="/#">Picnics</a>
-                    </div>
-                </div>
-                <CartWidget/>
-            </div>
-        </nav>
-     */
 };
 
 export default NavBar;

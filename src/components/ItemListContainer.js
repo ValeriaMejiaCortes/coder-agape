@@ -1,25 +1,25 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import data from "../data";
-import ItemCount from "./ItemCount";
 import ItemList from "./ItemList";
+import { useParams } from "react-router-dom";
 
 const ItemListContainer = (props) => {
   const [items, setItems] = useState([]);
+  const { id } = useParams();
 
-  function myPromise() {
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        res(data);
-      }, 2000);
-    }).then((reselvedItems) => setItems(reselvedItems));
-  }
-
-  myPromise();
+  useEffect(() => {
+    setTimeout(() => {
+      if (id === undefined) {
+        setItems(data);
+      } else {
+        console.log(data);
+        setItems(data.filter((product) => product.category_id === Number(id)));
+      }
+    }, 1000);
+  }, [id]);
 
   return (
     <>
-      <h1>{props.saludo}</h1>
-      <ItemCount stock={3} initial={1} />
       <ItemList items={items} />
     </>
   );

@@ -2,7 +2,12 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        navbarDark: "#1F2937",
+        navbarGold: "#F5D280",
+      },
+    },
   },
   plugins: [],
 };
