@@ -12,7 +12,6 @@ const ItemListContainer = (props) => {
       if (id === undefined) {
         setItems(data);
       } else {
-        console.log(data);
         setItems(data.filter((product) => product.category_id === Number(id)));
       }
     }, 1000);

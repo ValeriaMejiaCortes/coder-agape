@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 
 const ItemCount = ({ initial, stock, onAdd }) => {
-  const [products, setProducts] = useState(initial);
+  const [amount, setProducts] = useState(initial);
 
   function addProduct() {
-    if (products < stock) {
+    if (amount < stock) {
       setProducts((current) => current + 1);
     } else {
       alert("No hay más existencia");
@@ -12,7 +12,7 @@ const ItemCount = ({ initial, stock, onAdd }) => {
   }
 
   function deleteProduct() {
-    if (products > 0) {
+    if (amount > 0) {
       setProducts((current) => current - 1);
     } else {
       alert("Ya no tienes productos agregados");
@@ -49,7 +49,7 @@ const ItemCount = ({ initial, stock, onAdd }) => {
           type="button"
           className="px-1 w-full justify-items-center text-lg"
         >
-          {products}
+          {amount}
         </button>
         <button type="button" onClick={addProduct}>
           <svg
@@ -69,14 +69,14 @@ const ItemCount = ({ initial, stock, onAdd }) => {
           <span className="sr-only">Icon description</span>
         </button>
       </div>
-      {products && stock ? (
+      {amount && stock ? (
         <button
           className="w-full justify-center text-white border border-white 
       hover:text-navbarDark hover:bg-white font-medium rounded-lg text-sm 
       border-2 p-2.5 text-center inline-flex items-center bg-navbarDark hover:font-bold hover:border-navbarDark"
           role="group"
           aria-label="Button group with nested dropdown"
-          onClick={() => onAdd(products)}
+          onClick={() => onAdd(amount)}
         >
           Agregar al carrito
         </button>
