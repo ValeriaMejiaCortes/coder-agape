@@ -4,13 +4,16 @@ export const CartContext = createContext();
 
 const CartContextProvider = ({ children }) => {
   const [cartList, setCartList] = useState([]);
-  const [productAmount, setProductAmount] = useState(0);
+  const [totalAmount, setTotalAmount] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   const addToCart = (item, amount) => {
-    setProductAmount(amount);
+    item.amount = amount;
     if (!isInCart(item.id)) {
+      setTotalAmount(totalAmount + amount);
       let item01 = { ...item };
       item01.price = item.price * amount;
+      setTotalPrice(totalPrice + item01.price);
       setCartList([...cartList, item01]);
     } else {
       alert("ESTE ARTICULO YA ESTA AGREGADO EN EL CARRITO");
@@ -18,6 +21,9 @@ const CartContextProvider = ({ children }) => {
   };
 
   const removeItem = (itemId) => {
+    let tempCart = cartList.filter((obj) => obj.id === itemId);
+    setTotalAmount(totalAmount - tempCart[0].amount);
+    setTotalPrice(totalPrice - tempCart[0].price);
     const newArr = cartList.filter((object) => {
       return object.id !== itemId;
     });
@@ -25,6 +31,8 @@ const CartContextProvider = ({ children }) => {
   };
 
   const clear = () => {
+    setTotalPrice(0);
+    setTotalAmount(0);
     setCartList([]);
   };
 
@@ -39,7 +47,8 @@ const CartContextProvider = ({ children }) => {
         addToCart,
         removeItem,
         clear,
-        productAmount,
+        totalAmount,
+        totalPrice,
       }}
     >
       {children}

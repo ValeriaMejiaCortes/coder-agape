@@ -30,6 +30,7 @@ const data = [
     manera elegante`,
     category_id: 1,
     stock: 16,
+    amount: 0,
   },
   {
     id: 2,
@@ -40,6 +41,7 @@ const data = [
     acompañado de una sangria tamaño personal`,
     category_id: 1,
     stock: 10,
+    amount: 0,
   },
   {
     id: 3,
@@ -50,6 +52,7 @@ const data = [
       "Esta deliciosa combinación te transportara a lo mejor de España",
     category_id: 2,
     stock: 8,
+    amount: 0,
   },
   {
     id: 4,
@@ -60,6 +63,7 @@ const data = [
       "Dulces, caramelos y muchooo chocolate haran que tus hijos vivan una real aventura",
     category_id: 3,
     stock: 11,
+    amount: 0,
   },
   {
     id: 5,
@@ -70,6 +74,7 @@ const data = [
     y otra vez con esa persona especial`,
     category_id: 4,
     stock: 2,
+    amount: 0,
   },
 ];
 
