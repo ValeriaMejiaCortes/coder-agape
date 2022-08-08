@@ -2,22 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import data from "../data";
 import ItemDetail from "./ItemDetail";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "../utils/firebaseConfig";
+import { useNavigate } from "react-router-dom";
 
 const ItemDetailContainer = (props) => {
   const [item, setItem] = useState([]);
+  const navigate = useNavigate();
   const { id } = useParams();
 
-  function myPromise() {
-    return new Promise((res, rej) => {
-      setTimeout(() => {
-        res(data.find((item) => item.id === Number(id)));
-      }, 2000);
-    }).then((reselvedItem) => setItem(reselvedItem));
-  }
-
   useEffect(() => {
-    myPromise();
-  }, []);
+    async function getMyDoc() {
+      const docRef = doc(db, "products", id);
+      const docSnap = await getDoc(docRef);
+      if (docSnap.exists()) {
+        setItem(docSnap.data());
+      } else {
+        navigate(`/`, { replace: true });
+      }
+    }
+    getMyDoc();
+  }, [id, navigate]);
 
   return (
     <>

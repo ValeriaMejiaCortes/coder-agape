@@ -2,19 +2,33 @@ import React, { useEffect, useState } from "react";
 import data from "../data";
 import ItemList from "./ItemList";
 import { useParams } from "react-router-dom";
+import { db } from "../utils/firebaseConfig";
+import { getDocs, collection } from "firebase/firestore";
 
 const ItemListContainer = (props) => {
   const [items, setItems] = useState([]);
   const { id } = useParams();
 
   useEffect(() => {
-    setTimeout(() => {
-      if (id === undefined) {
-        setItems(data);
-      } else {
-        setItems(data.filter((product) => product.category_id === Number(id)));
-      }
-    }, 1000);
+    const firestoreFetch = async () => {
+      const querySnapshot = await getDocs(collection(db, "products"));
+      const dataFromFS = querySnapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      return dataFromFS;
+    };
+    firestoreFetch()
+      .then((result) => {
+        if (id === undefined) {
+          setItems(result);
+        } else {
+          setItems(
+            result.filter((product) => product.category_id === Number(id))
+          );
+        }
+      })
+      .catch((err) => console.log(err));
   }, [id]);
 
   return (
