@@ -16,7 +16,10 @@ const ItemDetailContainer = (props) => {
       const docRef = doc(db, "products", id);
       const docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
-        setItem(docSnap.data());
+        setItem({
+          id: docSnap.id,
+          ...docSnap.data(),
+        });
       } else {
         navigate(`/`, { replace: true });
       }

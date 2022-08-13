@@ -1,5 +1,14 @@
 import { CartContext } from "./CartContext";
 import { useContext } from "react";
+import {
+  collection,
+  doc,
+  increment,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from "firebase/firestore";
+import { db } from "../utils/firebaseConfig";
 
 const Cart = () => {
   const cartContext = useContext(CartContext);
@@ -7,6 +16,46 @@ const Cart = () => {
   function deleteItem(id) {
     cartContext.removeItem(id);
   }
+
+  const createOrder = () => {
+    let itemForBD = cartContext.cartList.map((item) => ({
+      id: item.id,
+      title: item.name,
+      price: item.price,
+      qty: item.amount,
+    }));
+    let order = {
+      buyer: {
+        email: "valeria@gmail.com",
+        name: "Valeria Mejía",
+        phone: "3126156755",
+      },
+      date: serverTimestamp(),
+      items: itemForBD,
+      total: cartContext.totalPrice,
+    };
+
+    const createOrderInFirestore = async () => {
+      const newOrderRef = doc(collection(db, "orders"));
+      await setDoc(newOrderRef, order);
+      return newOrderRef;
+    };
+
+    createOrderInFirestore()
+      .then((res) => alert("Se creo exitosamente tu orden el ID es: " + res.id))
+      .catch((error) => console.log(error));
+
+    cartContext.cartList.forEach(async (item) => {
+      const itemRef = doc(db, "products", item.id);
+      await updateDoc(itemRef, {
+        stock: increment(-item.amount),
+      });
+    });
+
+    setTimeout(() => {
+      cartContext.clear();
+    }, 2000);
+  };
 
   return (
     <>
@@ -57,6 +106,7 @@ const Cart = () => {
                   hover:text-navbarDark hover:bg-white font-normal rounded-lg text-md
                   font-bold border-2 p-2.5 mt-4 text-center inline-flex items-center 
                   bg-navbarDark hover:font-bold hover:border-navbarDark my-8"
+                onClick={createOrder}
               >
                 Comprar
               </button>
