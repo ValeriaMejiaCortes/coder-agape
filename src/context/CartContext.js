@@ -1,4 +1,5 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
+import { AlertContext } from "../context/AlertContext";
 
 export const CartContext = createContext();
 
@@ -6,6 +7,7 @@ const CartContextProvider = ({ children }) => {
   const [cartList, setCartList] = useState([]);
   const [totalAmount, setTotalAmount] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const alertContext = useContext(AlertContext);
 
   const addToCart = (item, amount) => {
     item.amount = amount;
@@ -16,7 +18,9 @@ const CartContextProvider = ({ children }) => {
       setTotalPrice(totalPrice + item01.price);
       setCartList([...cartList, item01]);
     } else {
-      alert("ESTE ARTICULO YA ESTA AGREGADO EN EL CARRITO");
+      alertContext?.setAlert({
+        description: "ESTE ARTICULO YA ESTA AGREGADO EN EL CARRITO",
+      });
     }
   };
 

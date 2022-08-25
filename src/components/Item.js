@@ -1,5 +1,4 @@
-import React, { useCallback } from "react";
-import ItemCount from "./ItemCount";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const Item = ({ product }) => {

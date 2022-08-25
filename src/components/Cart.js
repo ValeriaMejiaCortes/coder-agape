@@ -1,5 +1,7 @@
-import { CartContext } from "./CartContext";
 import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
+import { AlertContext } from "../context/AlertContext";
+
 import {
   collection,
   doc,
@@ -12,6 +14,7 @@ import { db } from "../utils/firebaseConfig";
 
 const Cart = () => {
   const cartContext = useContext(CartContext);
+  const alertContext = useContext(AlertContext);
 
   function deleteItem(id) {
     cartContext.removeItem(id);
@@ -42,7 +45,12 @@ const Cart = () => {
     };
 
     createOrderInFirestore()
-      .then((res) => alert("Se creo exitosamente tu orden el ID es: " + res.id))
+      .then((res) => {
+        alertContext.setAlert({
+          title: "La orden fue creada, el ID es: ",
+          description: res.id,
+        });
+      })
       .catch((error) => console.log(error));
 
     cartContext.cartList.forEach(async (item) => {
@@ -118,7 +126,10 @@ const Cart = () => {
       )}
       {cartContext.cartList.length > 0 ? (
         cartContext.cartList.map((item) => (
-          <div className="grid grid-cols-4 border lg:gap-1 justify-items-center text-left pl-32 pr-32 py-4 grid grid-flow-col gap-5 mb-2 px-6">
+          <div
+            key={item.id}
+            className="grid grid-cols-4 border lg:gap-1 justify-items-center text-left pl-32 pr-32 py-4 grid grid-flow-col gap-5 mb-2 px-6"
+          >
             <div
               className="shadow-2xl border border-navbarDark
             rounded min-w-full cursor-pointer h-full"

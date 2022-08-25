@@ -1,7 +1,12 @@
 import CartWidget from "./CartWidget";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import Alerts from "../components/Alerts";
+import { AlertContext } from "../context/AlertContext";
 
 const NavBar = () => {
+  const alertContext = useContext(AlertContext);
+
   return (
     <>
       <nav className="bg-gray-800">
@@ -144,6 +149,7 @@ const NavBar = () => {
           </div>
         </div>
       </nav>
+      {alertContext?.alert && <Alerts {...alertContext.alert}></Alerts>}
     </>
   );
 };

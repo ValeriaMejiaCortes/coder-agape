@@ -1,20 +1,15 @@
-import React, { useContext, useState } from "react";
-import { useParams, Link } from "react-router-dom";
-import { CartContext } from "./CartContext";
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 import ItemCount from "./ItemCount";
 
 const ItemDetail = ({ item }) => {
-  const [itemCount, setItemCount] = useState(0);
   const cartContext = useContext(CartContext);
 
   const onAdd = (quantity) => {
-    alert("You have selected " + quantity + " items");
-    setItemCount(quantity);
     cartContext.addToCart(item, quantity);
   };
-  /**
 
-       */
   return (
     <div className="grid grid-cols-2 grid-flow-col gap-4 pb-2 lg:gap-1 justify-items-end py-10 px-20">
       <div

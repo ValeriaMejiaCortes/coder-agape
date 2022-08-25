@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { AlertContext } from "../context/AlertContext";
 
 const ItemCount = ({ initial, stock, onAdd }) => {
   const [amount, setProducts] = useState(initial);
+  const alertContext = useContext(AlertContext);
 
   function addProduct() {
     if (amount < stock) {
       setProducts((current) => current + 1);
-    } else {
-      alert("No hay más existencia");
     }
   }
 
@@ -15,7 +15,9 @@ const ItemCount = ({ initial, stock, onAdd }) => {
     if (amount > 0) {
       setProducts((current) => current - 1);
     } else {
-      alert("Ya no tienes productos agregados");
+      alertContext.setAlert({
+        description: "Ya no tienes productos seleccionados",
+      });
     }
   }
 

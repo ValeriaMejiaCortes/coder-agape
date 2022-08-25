@@ -1,7 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { BsCart2 } from "react-icons/bs";
 import { Link } from "react-router-dom";
-import { CartContext } from "./CartContext";
+import { CartContext } from "../context/CartContext";
 
 const CartWidget = () => {
   const cartContext = useContext(CartContext);
